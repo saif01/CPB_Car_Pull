@@ -14,9 +14,7 @@ include('../db/config.php');
  ?>
 </head>
 <body>
-<!-- Start navbar  -->
-<?php include('include/navbar.php');?>
- <!-- End Navbar -->
+
    <!--  Start Sidebar -->
 	<?php include('include/sidebar.php');?>
 	<!--  End Sidebar -->

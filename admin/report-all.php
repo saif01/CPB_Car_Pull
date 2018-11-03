@@ -51,7 +51,7 @@ include('../db/config.php');
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>All Car Booking Information</h2>
+						<h2><i class="halflings-icon th-list"></i><span class="break"></span>All Car Booking Information</h2>
 						
 					</div>
 					<div class="box-content">

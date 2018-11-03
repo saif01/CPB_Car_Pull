@@ -15,23 +15,11 @@ include('../db/config.php');
 <?php include('include/header.php');?>
 </head>
 <body>
-<!-- Start navbar  -->
-<?php include('include/navbar.php');?>
- <!-- End Navbar -->
    <!--  Start Sidebar -->
 	<?php include('include/sidebar.php');?>
 	<!--  End Sidebar -->
 
 
-	
-			
-			<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="#" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
-			
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			

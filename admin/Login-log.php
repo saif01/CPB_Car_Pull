@@ -15,23 +15,13 @@ include('../db/config.php');
 <?php include('include/header.php');?>
 </head>
 <body>
-<!-- Start navbar  -->
-<?php include('include/navbar.php');?>
- <!-- End Navbar -->
+
    <!--  Start Sidebar -->
 	<?php include('include/sidebar.php');?>
 	<!--  End Sidebar -->
 
 
-	
-			
-			<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="#" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
-			
+
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
@@ -42,13 +32,13 @@ include('../db/config.php');
 					<a href="index.html">Home</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="#">All User Information </a></li>
+				<li><a href="#">Login Log </a></li>
 			</ul>
 
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>User Information</h2>
+						<h2><i class="halflings-icon list-alt"></i><span class="break"></span>All User Login Log Information</h2>
 						
 					</div>
 					<div class="box-content">
@@ -58,13 +48,15 @@ include('../db/config.php');
 
 						  <thead>
 							  <tr>
+							  	 <th>Log ID</th>
 							  	 <th>User</th>
 							  	 <th>User IP</th>
-								  <th>LogIn</th>
-								  <th>LogOut</th>
-								  								  
-								  <th>User Device</th>
-								  <th>User Status</th>
+								 <th>LogIn</th>
+								 <th>LogOut</th>
+								 <th>User OS</th>	
+								 <th>Browser</th>						  
+								 <th>User Device</th>
+								 <th>User Status</th>
 
 							  </tr>
 						  </thead>   
@@ -73,15 +65,21 @@ include('../db/config.php');
 		$query=mysqli_query($con," SELECT * FROM `loginlog` ORDER BY `login_id` DESC");
 		while($row=mysqli_fetch_array($query))
 		{
-
+ 
 ?>
 							<tr>
+								
 
+								<td class="center" ><?php echo htmlentities($row['login_id']) ; ?></td>
 								<td class="center" ><?php echo htmlentities($row['user_name']) ; ?></td>
 								<td class="center"><?php echo htmlentities($row['user_ip']); ?></td>
-								<td class="center"><?php echo htmlentities($row['logIn']); ?></td>
-								<td class="center"><?php echo htmlentities($row['logOut']); ?></td>
+								<td class="center"><?php echo date("F j, Y, g:i a", strtotime($row['logIn'])); ?></td>
+								<td class="center"><?php echo date("F j, Y, g:i a", strtotime($row['logOut']));?></td>
+								<td class="center"><?php echo htmlentities($row['user_os']); ?></td>
+								<td class="center"><?php echo htmlentities($row['user_browser']); ?></td>
+								
 								<td class="center"><?php echo htmlentities($row['user_device']); ?></td>
+
 								<td class="center"><?php 
 								$st=$row['user_status']; 
 								if ($st==1) {

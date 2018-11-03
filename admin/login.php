@@ -9,35 +9,65 @@ if(isset($_POST['submit']))
     $adminName=$_POST['adminName'];
     $password=$_POST['password'];
 
+
 $ret=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_name` = '$adminName' AND `admin_password` = '$password' ");
 
  $rowcount=mysqli_num_rows($ret);  
-//$num=mysqli_fetch_array($ret);
-//$num=mysqli_fetch_array($ret)
+
+$row=mysqli_fetch_array($ret);
 
 if($rowcount>0 )
 			
 			{   
-                        
+	$ret= mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_name` = '$adminName' ");
+    while($row=mysqli_fetch_array($ret))
+                {   
+
+                    $admin_id=$row['admin_id'];
+                    $st=$row['admin_status'];
+
+                    if ($st==1) 
+                    {  
+
+
                         $_SESSION['adminName']=$_POST['adminName'];
-                        $_SESSION['id']=$num['id'];
+                        $_SESSION['admin_id']=$row['admin_id'];
+                        $admin_status=$row['admin_status'];
                         $ip= UserInfo::get_ip();
                         $os= UserInfo::get_os();
                         $browser= UserInfo::get_browser();
                         $device= gethostname();
+
                               
                                             
-                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['adminName']."','".$_SESSION['id']."','$ip','$os','$browser','$device')");
+                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['adminName']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
                                         
                          header("Location: index");
                         exit();			
 
 				}
-			else
+			elseif($st==0)
 			    {
-			        $_SESSION['errmsg']="Invalid adminName or password";       
+			        $_SESSION['errmsg']="Your ID Was Blocked.!!! Contract With IT Department";       
 			        $_SESSION['adminName']=$_POST['adminName'];
-			      
+			        $admin_status=$row['admin_status'];
+			         $ip= UserInfo::get_ip();
+			         $os= UserInfo::get_os();
+			         $browser= UserInfo::get_browser();
+			         $device= UserInfo::get_device();
+			                               
+			         $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['adminName']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
+
+			         header("location: login");
+			        exit();
+			       
+			     }
+
+			     else{
+
+			     	$_SESSION['errmsg']="Username Or Password Not Match.!!!";       
+			        $_SESSION['adminName']=$_POST['adminName'];
+			        
 			         $ip= UserInfo::get_ip();
 			         $os= UserInfo::get_os();
 			         $browser= UserInfo::get_browser();
@@ -48,10 +78,29 @@ if($rowcount>0 )
 			         header("location: login");
 			        exit();
 			       
-			     }
-	
-}
 
+			     }
+			}
+		}
+
+ else{
+
+			     	$_SESSION['errmsg']="Username Or Password Not Match.!!!";       
+			        $_SESSION['adminName']=$_POST['adminName'];
+			        
+			         $ip= UserInfo::get_ip();
+			         $os= UserInfo::get_os();
+			         $browser= UserInfo::get_browser();
+			         $device= UserInfo::get_device();
+			                               
+			         $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['adminName']."','$ip','$rowcount','$browser','$device')");
+
+			         header("location: login");
+			        exit();
+
+			    }
+
+}
 ?>
 
 <?php include('include/header.php');?>
