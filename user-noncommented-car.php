@@ -48,13 +48,13 @@ $sdate2=$date1->format('d-m-Y h:i:s A ');
 $edate2=$date2->format('d-m-Y h:i:s A');
 
 
- //Start Time Subtraction and convert to days.
+ // Start Time Subtraction and convert to days.
         $ts1    =   strtotime($startDate);
         $ts2    =   strtotime($endDate);
         $seconds    = abs($ts2 - $ts1); # difference will always be positive
         $days = round($seconds/(60*60*24));
-  //Start Time Subtraction and convert to days.
-
+  // Start Time Subtraction and convert to days.
+ 
 
                           ?>
 
