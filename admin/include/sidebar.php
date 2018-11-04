@@ -63,6 +63,19 @@
                             </ul>   
                         </li>
 
+                         <li>
+                            <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Admin Section</span></a>
+                            <ul>
+                                
+                                <li><a class="submenu" href="admin-add"><i class="icon-file-alt"></i><span class="hidden-tablet"> Create New Admin</span></a></li>
+
+                                <li><a class="submenu" href="admin-panel"><i class="icon-file-alt"></i><span class="hidden-tablet"> All Admin Info</span></a></li>
+                                
+                            </ul>   
+                        </li> 
+
+
+
                         <!--  <li><a class="submenu" href="report-all"><i class="icon-file-alt"></i><span class="hidden-tablet">All Report</span></a></li>
                          
                          <li><a class="submenu" href="report"><i class="icon-file-alt"></i><span class="hidden-tablet"> Date Wise Report</span></a></li> -->

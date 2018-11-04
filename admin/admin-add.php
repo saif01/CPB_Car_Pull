@@ -14,26 +14,26 @@ include('../db/config.php');
 
 if (isset($_POST['submit'])) {
 
-$user_name=$_POST['user_name'];
-$user_pass=$_POST['user_pass'];
-$user_contract=$_POST['user_contract'];
-$user_officeId=$_POST['user_officeId'];
+$admin_name=$_POST['admin_name'];
+$admin_pass=$_POST['admin_pass'];
+$admin_contract=$_POST['admin_contract'];
+$admin_officeId=$_POST['admin_officeId'];
 
 //$compfile=$_FILES["compfile"]["name"]; 
-$user_img=$_FILES["user_img"]["name"];
+$admin_img=$_FILES["admin_img"]["name"];
 
-$user_status = 1;
+$admin_status = 1;
 
-move_uploaded_file($_FILES["user_img"]["tmp_name"],"p_img/userImg/".$_FILES["user_img"]["name"]);
+move_uploaded_file($_FILES["admin_img"]["tmp_name"],"p_img/adminimg/".$_FILES["admin_img"]["name"]);
 
 
-$query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_contract`, `user_img`, `user_officeId`, `user_status`) VALUES ('$user_name','$user_pass','$user_contract','$user_img','$user_officeId','$user_status')");
+$query=mysqli_query($con,"INSERT INTO `admin`(`admin_name`, `admin_password`, `admin_img`, `admin_phone`, `admin_officeID`, `admin_status`) VALUES ('$admin_name','$admin_pass','$admin_img','$admin_contract','$admin_officeId','$admin_status')");
 
 
 ?>
 <script>
     alert('Update successfull.  !');
-    window.open('user-reg.php','_self'); //for locating other page.
+    window.open('admin-panel.php','_self'); //for locating other page.
     //window.location.reload(); //For reload Same page
 
     </script>
@@ -64,7 +64,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
 				</li>
 				<li>
 					<i class="icon-edit"></i>
-					<a href="#">User Registration</a>
+					<a href="#">Admin Registration</a>
 				</li>
 			</ul>
 			
@@ -83,9 +83,9 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
 						
 
 							<div class="control-group">
-							  <label class="control-label" for="typeahead">User Name </label>
+							  <label class="control-label" for="typeahead">Admin Name </label>
 							  <div class="controls">
-								<input type="text" name="user_name" class="span6 typeahead" placeholder="Enter User Name">
+								<input type="text" name="admin_name" class="span6 typeahead" placeholder="Enter Admin Name">
 							  </div>
 							</div>
 
@@ -93,35 +93,35 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
 							  <label class="control-label" for="typeahead">Password </label>
 							  <div class="controls">
 							  	<!-- <input type="hidden" name="user_pass" value="12345" /> -->
-								<input type="text" name="user_pass" class="span6 typeahead" placeholder="Default Password" value="12345" >
+								<input type="text" name="admin_pass" class="span6 typeahead" placeholder="Default Password" value="12345" >
 							  </div>
 							</div>
 
 							<div class="control-group">
-							  <label class="control-label" for="typeahead">User Contract </label>
+							  <label class="control-label" for="typeahead">Admin Contract </label>
 							  <div class="controls">
-								<input type="text" name="user_contract" class="span6 typeahead" placeholder="Enter User Phone Number" >
+								<input type="text" name="admin_contract" class="span6 typeahead" placeholder="Enter Admin Phone Number" >
 							  </div>
 							</div>
 
 
 							<div class="control-group">
-							  <label class="control-label" for="typeahead">User Office ID </label>
+							  <label class="control-label" for="typeahead">Admin Office ID </label>
 							  <div class="controls">
-								<input type="text" name="user_officeId" class="span6 typeahead" placeholder="Enter User Office ID" >
+								<input type="text" name="admin_officeId" class="span6 typeahead" placeholder="Enter Admin Office ID" >
 							  </div>
 							</div>
 							
 							<div class="control-group">
-							  <label class="control-label" for="fileInput">User Image </label>
+							  <label class="control-label" for="fileInput">Admin Image </label>
 							  <div class="controls">
-								<input class="input-file uniform_on" name="user_img"  type="file">
+								<input class="input-file uniform_on" name="admin_img"  type="file">
 							  </div>
 							</div> 
 							
 		
 							<div class="form-actions">
-							  <button type="submit" name="submit" class="btn btn-primary">User Register</button>
+							  <button type="submit" name="submit" class="btn btn-primary">Admin Register</button>
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 
