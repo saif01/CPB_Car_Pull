@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2018 at 01:55 PM
+-- Generation Time: Nov 04, 2018 at 07:07 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -32,7 +32,9 @@ CREATE TABLE `admin` (
   `admin_id` int(6) NOT NULL,
   `admin_name` varchar(100) NOT NULL,
   `admin_password` varchar(100) NOT NULL,
+  `admin_img` varchar(255) NOT NULL,
   `admin_phone` varchar(100) NOT NULL,
+  `admin_officeID` varchar(100) NOT NULL,
   `admin_status` varchar(20) NOT NULL,
   `register` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,9 +43,9 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_password`, `admin_phone`, `admin_status`, `register`) VALUES
-(1, 'admin', '5683', '01707080401', '1', '2018-11-03 11:27:54'),
-(2, 'admin2', '5683', '01707080401', '0', '2018-11-03 11:27:54');
+INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_password`, `admin_img`, `admin_phone`, `admin_officeID`, `admin_status`, `register`) VALUES
+(1, 'admin', '5683', 'download.png', '01707080401', 'BD00058', '1', '2018-11-04 05:28:05'),
+(3, 'Sagol', '12345', 'download.png', '017070707', 'BD25821', '0', '2018-11-04 05:29:42');
 
 -- --------------------------------------------------------
 
@@ -352,7 +354,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `admin_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `car_booking`
