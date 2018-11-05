@@ -16,7 +16,7 @@ else{
  include('db/config.php');
 
      ?>
-
+ 
     <!--== Car List Area Start ==-->
     <div id="blog-page-content" class="section-padding">
         <div class="container">
@@ -56,8 +56,11 @@ if ($car_status==1) {
                              $st2=DATE('Y-m-d');
                              $car_id=$row['car_id'];
 
-                             $query3=mysqli_query($con,"SELECT `start_date` FROM `car_booking` WHERE `car_id` ='$car_id' AND DATE(`start_date`) = '$st2' ");
-                             //$query3=mysqli_query($con,"SELECT `start_date` FROM `car_booking` WHERE `car_id` ='$car_id' AND `start_date` = '$currentTime' ");
+                             //$query3=mysqli_query($con,"SELECT `start_date` FROM `car_booking` WHERE `car_id` ='$car_id' AND DATE(`start_date`) = '$st2' ");
+
+
+
+                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`=$car_id AND date('$st2') BETWEEN date(`start_date`) AND date(`end_date`)");
 
                              //$row3=$query3->fetch_assoc();
                              $row3=mysqli_num_rows($query3);

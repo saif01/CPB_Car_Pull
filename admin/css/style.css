@@ -462,7 +462,8 @@ a.brand span {
 .nav-tabs.nav-stacked  > li.active > a,
 .nav-tabs.nav-stacked  > li > ul > li.active > a {
   	background: #2D89EF;
-	border-bottom: 1px solid #2D89EF;
+	border-bottom: 1.5px solid #FFFF00;
+    border-top: 1.5px solid #FFFF00;
 }
 
 .nav-tabs.nav-stacked  > li.active > a:hover,
@@ -470,13 +471,14 @@ a.brand span {
   	background: #2D89EF;
 	color: #fff;
 	border: none;
-	border-bottom: 1px solid #2D89EF;
+    border-top: 1.5px solid #FFFF00;
+	border-bottom: 1.5px solid #FFFF00;
 }
 
 .nav-tabs.nav-stacked  > li.active > ul {
 	padding: 5px 0px;
   	color: #3b3b41;
-  	background: #fff;
+  	background: #FFFF00;
 }
 
 .nav-tabs.nav-stacked > li:first-child > a {
@@ -546,7 +548,7 @@ a.brand span {
   	*margin: -5px 0 5px;
   	overflow: hidden;
   	background-color: #eee;
-  	border-bottom: 1px solid #ffffff;
+  	border-bottom: 1.5px solid #FFFF00;
 }
 
 .dropdown-menu li a {
@@ -561,7 +563,7 @@ a.brand span {
 }
 
 .dropdown-menu li {
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #FFFF00;
 }
 
 .dropdown-menu li:first-child {
@@ -617,11 +619,11 @@ a.brand span {
 }
 
 .dropdown-menu-title a i {
-	color: #fff;
+	color: #FFFF00;
 }
 
 .dropdown-menu-title a:hover {
-	background: #fff !important;
+	background: #FFFF00 !important;
 }
 
 .dropdown-menu-title a:hover i {

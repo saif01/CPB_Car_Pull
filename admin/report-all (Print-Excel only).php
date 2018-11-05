@@ -11,8 +11,37 @@ include('../db/config.php');
 
 	?>
 
-	<!-- All header link -->
-<?php include('include/header.php');?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>CPB.CarPull</title>
+	<meta name="description" content="Bootstrap Metro Dashboard">
+	<meta name="author" content="Dennis Ji">
+	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+	
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<!-- end: Favicon -->
+	
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
 <script language="javascript" type="text/javascript">
             var popUpWin = 0;
@@ -21,12 +50,12 @@ include('../db/config.php');
                 if (popUpWin) {
                     if (!popUpWin.closed) popUpWin.close();
                 }
-                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 500 + ',height=' + 480 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 600 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
             }
         </script>
 
- 
 
+	</head>	
 <body>
 
    <!--  Start Sidebar -->
@@ -51,8 +80,11 @@ include('../db/config.php');
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon th-list"></i><span class="break"></span>All Car Booking Information</h2>
-						
+						<h2><i class="halflings-icon user"></i><span class="break"></span>All Car Booking Information</h2>
+						<div class="box-icon">
+							
+							
+						</div>
 					</div>
 					<div class="box-content">
 
@@ -62,12 +94,12 @@ include('../db/config.php');
 
 
 
-						<table class="table table-striped table-bordered bootstrap-datatable datatable">
-
+						<!-- <table  class="table table-striped table-bordered bootstrap-datatable datatable"> -->
+<table id="example" class="display" style="width:100%"> 
 
 						  <thead>
 							  <tr>
-							  	 <th>Car</th>							  	 
+							  	<th>Car</th>							  	 
 								  <th>Booking Starts</th>
 								  <th>Booking Ends</th>
 								  <th>Location</th>
@@ -90,9 +122,7 @@ include('../db/config.php');
 ?>
 							<tr>
 
-								
-
-								<td class="center" >
+								<td width="" >
 									<a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Driver Info.">
 
 									<?php echo htmlentities($row['car_name']. '- '.$row['car_number'] ) ; ?></a>
@@ -153,13 +183,55 @@ include('../db/config.php');
 
 
 	<!-- end: Content -->
+		</div><!--/#content.span10-->
 		
-		
+	</div><!--/#content.span10-->
+</div><!--/fluid-row-->
+
 	
 	<!-- start: JavaScript-->
 
 
 
-	<?php include('include/footer.php');?>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+	
+$(document).ready( function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [ {
+            extend: 'excelHtml5',
+            // customize: function( xlsx ) {
+            //     var sheet = xlsx.xl.worksheets['sheet1.xml'];
+ 
+            //     $('row c[r^="A"]', sheet).attr( 's', '2' );
+            // }
+        } ]
+    } );
+} );
+
+</script>
+
+
+
+<div class="clearfix"></div>
+	
+	<script src="js/custom.js"></script>
+
+<?php include('include/only_footer.php');?>
+	
 	
 	<?php } ?>

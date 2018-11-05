@@ -10,36 +10,50 @@ else{
 include('../db/config.php');
 include('../db/calDB.php');
 
-$sql=mysqli_query($con," SELECT * FROM `user`");
+$sql=mysqli_query($con,"SELECT * FROM `user`");
 $users=mysqli_num_rows($sql);
 
-$sql2=mysqli_query($con," SELECT * FROM `car_driver`");
+$sql2=mysqli_query($con,"SELECT * FROM `car_driver`");
 $drivers=mysqli_num_rows($sql2);
 
-$sql3=mysqli_query($con," SELECT * FROM `tbl_car`");
+$sql3=mysqli_query($con,"SELECT * FROM `tbl_car`");
 $cars=mysqli_num_rows($sql3);
 
+$sql4=mysqli_query($con,"SELECT * FROM `car_booking`");
+$booking=mysqli_num_rows($sql4);
 
+//car used chart Mysql
 $query2="SELECT `car_name` ,COUNT(*) as number FROM `car_booking` GROUP BY `car_id` ";
 $result2 = mysqli_query($con, $query2);
 
-
-
-$query = "SELECT `year` FROM `chart_info` GROUP BY `year` DESC";
-
-$statement = $connect->prepare($query);
-
-$statement->execute();
-
-$result = $statement->fetchAll();
-
+        
+$query3="SELECT `user_name`, COUNT(*) as number FROM `car_booking` GROUP BY `user_name`";
+$result3 = mysqli_query($con, $query3);
 
 	?>
 
 
 <!-- All header link -->
 <?php include('include/header.php');?>
+<style type="text/css">
+	.icon-s{
+		border-radius: 50px 15px !important;
+	}
+	.f-size{
+		font-size: 30px;
+		background: #696969 !important;
+		
+	}
+	.t-size{
+		font-size: 20px;
+		background: #808080;
+		border-radius:20px;
+		margin-right: 45px;
 
+		
+	}
+
+</style>
 
 </head>
 <body>
@@ -70,7 +84,7 @@ $result = $statement->fetchAll();
 								<li class="dropdown-menu-title">
  									<span>Account Settings</span>
 								</li>
-								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+								<li><a href="change-password"><i class="halflings-icon user"></i> Chnage PassWord</a></li>
 								<li><a href="Logout-admin"><i class="halflings-icon off"></i> Logout</a></li>
 							</ul>
 						</li>
@@ -108,7 +122,7 @@ $result = $statement->fetchAll();
 				<div class="row-fluid sortable">
 				<div class="box span6">
 					<div class="box-header">
-						<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Pie</h2>
+						<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Car Pie Chart</h2>
 						<div class="box-icon">
 							
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -123,7 +137,7 @@ $result = $statement->fetchAll();
 
 			<div class="box span6">
 					<div class="box-header">
-						<h2><i class="halflings-icon list-alt"></i><span class="break"></span>Pie</h2>
+						<h2><i class="halflings-icon list-alt"></i><span class="break"></span>User Pie Chart</h2>
 						<div class="box-icon">
 							
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -131,7 +145,7 @@ $result = $statement->fetchAll();
 						</div>
 					</div>
 					<div class="box-content">
-							 <!-- <div id="Calendar_S" style=" height: 300px;"></div>  -->
+							<div id="Calendar_u" style=" height: 300px;"></div> 
 					</div>
 				</div>
 				
@@ -140,44 +154,37 @@ $result = $statement->fetchAll();
 						
 			</div>	
 
-
-
-
-
-
-
-						
 			
 			
 			<div class="row-fluid">	
 
 				
 
-				<a href="user-all-info" class="quick-button metro yellow span2" style="border-radius: 50px 15px;">
+				<a href="user-all-info" class="quick-button metro yellow span2 icon-s" >
 					<i class="icon-user"></i>
-					<p>All Users</p>
-					<span class="badge"> <?php echo $users; ?></span>
+					<p class="t-size">All Users</p>
+					<span class="badge f-size"> <?php echo $users; ?></span>
 				</a>
 
-				<a href="driver-all-info" class="quick-button metro purple span2" style="border-radius: 50px 15px;">
+				<a href="driver-all-info" class="quick-button metro purple span2 icon-s" >
 					<i class="icon-group"></i>
-					<p>All Drivers</p>
-					<span class="badge"> <?php echo $drivers; ?></span>
+					<p class="t-size">All Drivers</p>
+					<span class="badge f-size"> <?php echo $drivers; ?></span>
 				</a>
 
-				<a href="car-table" class="quick-button metro green span2" style="border-radius: 50px 15px;">
-					<i class="icon-cog"></i>
-					<span class="badge"> <?php echo $cars; ?></span>
-					<p>All Cars</p>
+				<a href="car-table" class="quick-button metro green span2 icon-s">
+					<i class="icon-truck"></i>
+					<span class="badge f-size"> <?php echo $cars; ?></span>
+					<p class="t-size">All Cars</p>
 				</a>
-				<a class="quick-button metro pink span2">
-					<i class="icon-random"></i>
-					<p>Messages</p>
-					<span class="badge">88</span>
+				<a href="report-all" class="quick-button metro pink span2 icon-s">
+					<i class="icon-briefcase"></i>
+					<p class="t-size">Reports</p>
+					<span class="badge"> <?php echo $booking; ?></span>
 				</a>
-				<a href="calendar-view" class="quick-button metro black span2">
+				<a href="calendar-view" class="quick-button metro black span2 icon-s">
 					<i class="icon-calendar"></i>
-					<p>Calendar</p>
+					<p class="t-size">Calendar</p>
 				</a>
 				
 				<div class="clearfix"></div>
@@ -215,14 +222,40 @@ $result = $statement->fetchAll();
                           ?>  
                      ]);  
                 var options = {  
-                      title:'Percentage of Car Pull',  
-                      is3D:true,  
-                      //pieHole: 0.5  
+                      title:'Percentage of Car Pulled',  
+                      //is3D:true,  
+                      pieHole: 0.4  
                      };  
                 var chart = new google.visualization.PieChart(document.getElementById('Calendar_S'));  
                 chart.draw(data, options);  
            }  
            </script>
+
+<script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(Calendar_u);  
+           function Calendar_u()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['user_name', 'Number'],  
+                          <?php  
+                          while($row3 = mysqli_fetch_array($result3))  
+                          {  
+                               echo "['".$row3["user_name"]."', ".$row3["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title:'User Booking Pai Chart',  
+                      is3D:true,  
+                      //pieHole: 0.5  
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('Calendar_u'));  
+                chart.draw(data, options);  
+           }  
+           </script>
+
+
 
 
 <!-- Bar Chart Link -->
@@ -231,67 +264,8 @@ $result = $statement->fetchAll();
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- Bar Chart Link -->
 
-	<script type="text/javascript">
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback();
+	
 
-function load_monthwise_data(year, title)
-{
-    var temp_title = title + ' '+year+'';
-    $.ajax({
-        url:"../cal/barChart/data-load.php",
-        method:"POST",
-        data:{year:year},
-        dataType:"JSON",
-        success:function(data)
-        {
-            drawMonthwiseChart(data, temp_title);
-        }
-    });
-}
-
-function drawMonthwiseChart(chart_data, chart_main_title)
-{
-    var jsonData = chart_data;
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Month');
-    data.addColumn('number', 'Booking_day');
-    $.each(jsonData, function(i, jsonData){
-        var month = jsonData.month;
-        var booking_day = parseFloat($.trim(jsonData.booking_day));
-        data.addRows([[month, booking_day]]);
-    });
-    var options = {
-        title:chart_main_title,
-        hAxis: {
-            title: "Months"
-        },
-        vAxis: {
-            title: 'Booking_day'
-        }
-    };
-
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart_area'));
-    chart.draw(data, options);
-}
-
-</script>
-
-<script>
-    
-$(document).ready(function(){
-
-    $('#year').change(function(){
-        var year = $(this).val();
-        if(year != '')
-        {
-            load_monthwise_data(year, 'Month Wise Profit Data For');
-        }
-    });
-
-});
-
-</script>
 	
 	<?php include('include/footer.php');?>
 	

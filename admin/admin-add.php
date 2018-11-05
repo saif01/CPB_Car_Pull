@@ -11,7 +11,6 @@ else{  ?>
 include('../db/config.php');
 
 
-
 if (isset($_POST['submit'])) {
 
 $admin_name=$_POST['admin_name'];
