@@ -1,6 +1,4 @@
 <?php
-session_start();
-error_reporting(0);
 
 include('../db/config.php');
 
@@ -13,180 +11,195 @@ $row=$query->fetch_assoc();
 
 ?>
 
-<?php include('include/header.php');?>
-<body>
-	
 
-	<link rel="shortcut icon" href="img/favicon.ico">
-	<!-- end: Favicon -->
-	
-			<style type="text/css">
-			body { background: url(img/bg-login.jpg) !important; }
-		</style>
-		
-	<style type="text/css">
-		
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>CPB.CarPull</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <style type="text/css">
+    
 .user-s
 {
-	width: 200px;
-	height: 120px;
-	border-radius: 20%;
-	overflow: hidden;
-	position: absolute;
-	top: calc(20px/2);
-	left: calc(45% - 50px);
+  width: 300px;
+  height: 120px;
+  border-radius: 20%;
+  overflow: hidden;
+  position: absolute;
+  top: calc(20px/2);
+  left: calc(30% - 50px);
+  margin-top: -90px;
 }
 
 
-	</style>	
-		
+  </style>  
+
+
 </head>
 
 <body>
-		<div class="container-fluid-full">
-		<div class="row-fluid">
-					
-			<div class="row-fluid">
-				
-				<div class="login-box">
-					 <img class="user-s" src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Image"   />
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+      <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+        <div class="row w-100">
+          <div class="col-lg-4 mx-auto">
+            <div class="auto-form-wrapper">
 
-
-					
-
-					
-					
-				<table>
+  <img class="user-s" src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Image"   />
+        <table>
  
-<td>  <h2>User Detail's:</h2>  </td>
+<td>  <h4>User Detail's: </h4> </td>
 
 
-					<tr>					
-					<td> <h2>Car Name:</h2></td>
-					<th> <h2> <strong><?php echo $row['car_name'];?></strong> </h2></th>
-					</tr>
+          <tr>          
+          <td> Car Name:</td>
+          <th> <strong><?php echo $row['car_name'];?></strong> </th>
+          </tr>
 
-					<tr>					
-					<td> <h2>Car Number:</h2></td>
-					<th> <h2> <strong><?php echo $row['car_namePlate'];?></strong> </h2></th>
-					</tr>
-					
+          <tr>          
+          <td> Car Number:</td>
+          <th>  <strong><?php echo $row['car_namePlate'];?></strong> </th>
+          </tr>
+          
 
-					<tr>					
-					<td> <h2>Car Type:</h2></td>
-					<th> <h2><strong><?php echo $row['car_type'];?></strong> </h2></th>
-					</tr>
+          <tr>          
+          <td> Car Type:</td>
+          <th> <strong><?php echo $row['car_type'];?></strong> </th>
+          </tr>
 
-					<tr>					
-					<td> <h2>Car Type:</h2></td>
-					<th> <h2><strong><?php echo $row['car_type'];?></strong> </h2></th>
-					</tr>
+          <tr>          
+          <td> Car Type:</td>
+          <th> <strong><?php echo $row['car_type'];?></strong> </th>
+          </tr>
 
-					<tr>					
-					<td> <h2>Car Capacity:</h2></td>
-					<th> <h2><strong><?php echo $row['car_capacity'];?></strong> </h2></th>
-					</tr>
+          <tr>          
+          <td> Car Capacity:</td>
+          <th> <strong><?php echo $row['car_capacity'];?></strong> </th>
+          </tr>
 
-					<tr>					
-					<td> <h2>Car Remarks:</h2></td>
-					<th> <h2><?php echo $row['car_remarks'];?></h2> </th>
-					</tr>
-					
-					<tr>					
-					<td> <h2>User Status:</h2></td>
-					<th> <h2> <strong><?php $st =$row['show_status'];
+          <tr>          
+          <td> Car Remarks:</td>
+          <th> <?php echo $row['car_remarks'];?> </th>
+          </tr>
+          
+          <tr>          
+          <td> User Status:</td>
+          <th>  <strong><?php $st =$row['show_status'];
 
-					if ($st==1) {
-						echo "Show";
-					}
-					else{
-						echo "Not Show";
-					}?>
-						
-					</strong> </h2></th>
-					</tr>
+          if ($st==1) {
+            echo "Show";
+          }
+          else{
+            echo "Not Show";
+          }?>
+            
+          </strong> </th>
+          </tr>
+
+          <tr>          
+          <td> Car GPS:</td>
+          <th>  <strong><?php $st =$row['car_gps'];
+
+          if ($st==1) {
+            echo "Yes";
+          }
+          else{
+            echo "No";
+          }?>
+            
+          </strong> </th>
+          </tr>
+
+          <tr>          
+          <td> Aircondition:</td>
+          <th>  <strong><?php $st =$row['car_aircobdition'];
+
+          if ($st==1) {
+            echo "Yes";
+          }
+          else{
+            echo "No";
+          }?>
+            
+          </strong> </th>
+          </tr>
+
+          <tr>          
+          <td>Power Door Lock:</td>
+          <th>  <strong><?php $st =$row['car_power_doorLock'];
+
+          if ($st==1) {
+            echo "Yes";
+          }
+          else{
+            echo "No";
+          }?>
+            
+          </strong> </th>
+          </tr>
+
+          <tr>          
+          <td>CD Player:</td>
+          <th>  <strong><?php $st =$row['car_cdPlayer'];
+
+          if ($st==1) {
+            echo "Yes";
+          }
+          else{
+            echo "No";
+          }?>
+            
+          </strong> </th>
+          </tr>
+
+          <tr>          
+          <td>Registration:</td>
+          <th>  <strong><?php echo date("F j, Y, g:i a", strtotime($row['reg_time'])); ?>
+            
+          </strong> </th>
+          </tr>
 
 
-
-
-				</table>
-
-					
-				
-
-					
-				</div><!--/span-->
-			</div><!--/row-->
-			
-
-	</div><!--/.fluid-container-->
-	
-		</div><!--/fluid-row-->
-	
-	<!-- start: JavaScript-->
-
-		<script src="js/jquery-1.9.1.min.js"></script>
-	<script src="js/jquery-migrate-1.0.0.min.js"></script>
-	
-		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
-	
-		<script src="js/jquery.ui.touch-punch.js"></script>
-	
-		<script src="js/modernizr.js"></script>
-	
-		<script src="js/bootstrap.min.js"></script>
-	
-		<script src="js/jquery.cookie.js"></script>
-	
-		<script src='js/fullcalendar.min.js'></script>
-	
-		<script src='js/jquery.dataTables.min.js'></script>
-
-		<script src="js/excanvas.js"></script>
-	<script src="js/jquery.flot.js"></script>
-	<script src="js/jquery.flot.pie.js"></script>
-	<script src="js/jquery.flot.stack.js"></script>
-	<script src="js/jquery.flot.resize.min.js"></script>
-	
-		<script src="js/jquery.chosen.min.js"></script>
-	
-		<script src="js/jquery.uniform.min.js"></script>
-		
-		<script src="js/jquery.cleditor.min.js"></script>
-	
-		<script src="js/jquery.noty.js"></script>
-	
-		<script src="js/jquery.elfinder.min.js"></script>
-	
-		<script src="js/jquery.raty.min.js"></script>
-	
-		<script src="js/jquery.iphone.toggle.js"></script>
-	
-		<script src="js/jquery.uploadify-3.1.min.js"></script>
-	
-		<script src="js/jquery.gritter.min.js"></script>
-	
-		<script src="js/jquery.imagesloaded.js"></script>
-	
-		<script src="js/jquery.masonry.min.js"></script>
-	
-		<script src="js/jquery.knob.modified.js"></script>
-	
-		<script src="js/jquery.sparkline.min.js"></script>
-	
-		<script src="js/counter.js"></script>
-	
-		<script src="js/retina.js"></script>
-
-		<script src="js/custom.js"></script>
-	<!-- end: JavaScript-->
-	
+        </table>
+                
+                
+              
+            </div>
+            
+           <?php include('common/footer.php') ?>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/misc.js"></script>
+  <!-- endinject -->
 </body>
+
 </html>
-
-
-
-
-
-
-

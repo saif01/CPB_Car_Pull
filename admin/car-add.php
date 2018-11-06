@@ -1,16 +1,7 @@
 <?php
-session_start();
-error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
-  { 
-header('location:login');
-}
-else{  ?>
-
-<?php
 include('../db/config.php');
 
-
+ 
 
 if (isset($_POST['submit'])) {
 
@@ -28,16 +19,16 @@ $car_cd_player=$_POST['car_cd_player'];
 
 $remarks=$_POST['remarks'];
 //$compfile=$_FILES["compfile"]["name"]; 
-$driver_img=$_FILES["driver_img"]["name"];
+$imgA=$_FILES["imgA"]["name"];
 $imgB=$_FILES["imgB"]["name"];
 $imgC=$_FILES["imgC"]["name"];
 
-move_uploaded_file($_FILES["driver_img"]["tmp_name"],"p_img/carImg/".$_FILES["driver_img"]["name"]);
+move_uploaded_file($_FILES["imgA"]["tmp_name"],"p_img/carImg/".$_FILES["imgA"]["name"]);
 move_uploaded_file($_FILES["imgB"]["tmp_name"],"p_img/carImg/".$_FILES["imgB"]["name"]);
 move_uploaded_file($_FILES["imgC"]["tmp_name"],"p_img/carImg/".$_FILES["imgC"]["name"]);
 
 
-$query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `car_type`, `car_capacity`, `car_img1`, `car_img2`, `car_img3`, `car_door`, `car_gearbox`, `car_gps`, `car_aircobdition`, `car_power_doorLock`, `car_cdPlayer`, `car_remarks`) VALUES ('$car_name','$car_namePlate','$car_type','$car_capacity','$driver_img','$imgB','$imgC','$car_door','$car_gearbox','$car_gps','$car_aircondition','$car_power_doorLock','$car_cd_player','$remarks')");
+$query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `car_type`, `car_capacity`, `car_img1`, `car_img2`, `car_img3`, `car_door`, `car_gearbox`, `car_gps`, `car_aircobdition`, `car_power_doorLock`, `car_cdPlayer`, `car_remarks`) VALUES ('$car_name','$car_namePlate','$car_type','$car_capacity','$imgA','$imgB','$imgC','$car_door','$car_gearbox','$car_gps','$car_aircondition','$car_power_doorLock','$car_cd_player','$remarks')");
 
 
 ?>
@@ -47,217 +38,293 @@ $query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `c
     </script>
 <?php } ?>
 
-<?php include('include/header.php');?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Star Admin Free Bootstrap-4 Admin Dashboard Template</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
 </head>
+
 <body>
-	
-	<?php include('include/sidebar.php');?>
-			
-			
-			<!-- start: Content -->
-			<div id="content" class="span10">
-			
-			
-			<ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index">Home</a>
-					<i class="icon-angle-right"></i> 
-				</li>
-				<li>
-					<i class="icon-edit"></i>
-					<a href="#">Car Add</a>
-				</li>
-			</ul>
-			
-			<div class="row-fluid sortable">
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Car Add Form</h2>
-						
-					</div>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+   <?php include('common/navbar.php'); ?>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        
+      <!-- partial:partials/_sidebar.html -->
+      <?php include('common/sidebar.php'); ?>
+      <!-- partial -->
+      
+      <div class="main-panel">      	
+        <div class="content-wrapper">
+        	<div class="row">
 
-					<div class="box-content">
+        	 <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Car Add Form</h4>
+                  <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+                    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
 
-						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-						  <fieldset>
+                          <label class="col-sm-3 col-form-label">Car Name </label>
+                          <div class="col-sm-9">
+                            
+                            <input type="text" name="car_name" class="form-control" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["BMW","Toyota","Suzuki","Mitsubishi","Nissan","Toyota Allion","Toyota Probox","Toyota Noah","Toyota Axio","Toyota Belta","Honda Airwave","Toyota Corolla","Toyota HiAce"]'>
+                <p style="color: green;" class="help-block">Start typing to activate auto complete!</p>
 
-		<div class="span6">
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Car Name </label>
-							  <div class="controls">
-								<input type="text" name="car_name" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["BMW","Toyota","Suzuki","Mitsubishi","Nissan","Toyota Allion","Toyota Probox","Toyota Noah","Toyota Axio","Toyota Belta","Honda Airwave","Toyota Corolla","Toyota HiAce"]'>
-								<p class="help-block">Start typing to activate auto complete!</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car Number</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="car_namePlate" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car Type</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="car_type">
+                    <option value=""> Select Value</option>
+                  <option value="CNG">CNG</option>
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diesel">Diesel</option>
+                  
+                  </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car Capacity</label>
+                          <div class="col-sm-9">
+                            <input type="Number" name="car_capacity" class="form-control"  />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car GearBox</label>
+                          <div class="col-sm-9">
+                            <select class="form-control" name="car_gearbox">
+                              <option value=""> Select Value</option>
+                              <option value="Automatic">Automatic</option>
+                              <option value="Manual">Manual</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
 
-							  </div>
-							</div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car Door</label>
+                          <div class="col-sm-9">
+                            
+                            <input type="Number" name="car_door" class="form-control"  />
 
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Car Number </label>
-							  <div class="controls">
-								<input type="text" name="car_namePlate" class="span6 typeahead" >
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Car Type </label>
-							  <div class="controls">
-							  	<select id="selectError3" name="car_type">
-							  		<option value=""> Select Value</option>
-									<option value="CNG">CNG</option>
-									<option value="Petrol">Petrol</option>
-									<option value="Diesel">Diesel</option>
-									
-								  </select>
-								
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Car Capacity </label>
-							  <div class="controls">
-								<input type="Number" name="car_capacity" class="span6 typeahead" >
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Car GearBox </label>
-							  <div class="controls">
-								<select id="selectError3" name="car_gearbox">
-									<option value=""> Select Value</option>
-									<option value="Automatic">Automatic</option>
-									<option value="Manual">Manual</option>
-									
-								  </select>
-							  </div>
-							</div>
-
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Car Door </label>
-							  <div class="controls">
-								<input type="Number" name="car_door" class="span6 typeahead" >
-							  </div>
-							</div>
-</div>
-							
-
-
-<div class="span6">
-							<div class="control-group">
-							  <label class="control-label" for="fileInput">First Image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="driver_img"  type="file">
-							  </div>
-							</div>     
-							<div class="control-group">
-							  <label class="control-label" for="fileInput">Second Image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="imgB" type="file">
-							  </div>
-							</div>     
-							<div class="control-group">
-							  <label class="control-label" for="fileInput">Third Image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="imgC"   type="file">
-							  </div>
-							</div>
-
-	
-
-					
-							  <div class="control-group">
-								<label class="control-label"> Car Aircondition </label>
-								<div class="controls">
-								  <label class="checkbox inline">
-								  	<input type="hidden" name="car_aircondition" value="0" />
-									<input type="checkbox"  id="inlineCheckbox1" name="car_aircondition"  value="1"> If yes then click or Ignore.
-								  </label>
-								  
-								</div>
-							  </div> 
-							  <div class="control-group">
-								<label class="control-label"> Power Door Lock </label>
-								<div class="controls">
-								  <label class="checkbox inline">
-								  		<input type="hidden" name="car_power_doorLock" value="0" />
-									<input type="checkbox" name="car_power_doorLock" id="inlineCheckbox2" id="inlineCheckbox3" value="1"> If yes then click or Ignore.
-								  </label>
-								  
-								</div>
-							  </div>         
-							  <div class="control-group">
-								<label class="control-label"> CD Player </label>
-								<div class="controls">
-								  <label class="checkbox inline">
-								  	<input type="hidden" name="car_cd_player" value="0" />
-									<input type="checkbox" name="car_cd_player"  value="1"> If yes then click or Ignore
-								  </label>
-								  
-								</div>
-							  </div>
+                          </div>
+                        </div>
+                      </div>
 
 
-							   <div class="control-group">
-								<label class="control-label"> Car GPS </label>
-								<div class="controls">
-								  <label class="checkbox inline">
-								  	<input type="hidden" name="car_gps" value="0" />
-									<input type="checkbox" name="car_gps"  value="1"> If yes then click or Ignore
-								  </label>
-								  
-								</div>
-							  </div>
+                      
 
-	</div>
-			
-			<div  class="span12">
-							<div class="control-group hidden-phone">
-							  <label class="control-label" for="textarea2">Remarks</label>
-							  <div class="controls">
-								<textarea class="cleditor" name="remarks" id="textarea2" rows="1"></textarea>
-							  </div>
-							</div>
-			
+                    </div>
+                    <p class="card-description">
+                      Radio Input
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car Aircondition</label>
+                          <div class="col-sm-4">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_aircondition" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_aircondition" id="membershipRadios2" value="0"> No
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Power Door Lock</label>
+                          <div class="col-sm-4">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_power_doorLock" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_power_doorLock" id="membershipRadios2" value="0"> No
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">CD Player</label>
+                          <div class="col-sm-4">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_cd_player" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_cd_player" id="membershipRadios2" value="0"> No
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Car GPS</label>
+                          <div class="col-sm-4">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_gps" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="form-radio">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="car_gps" id="membershipRadios2" value="0"> No
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-				
-							<div class="form-actions">
-							  <button type="submit" name="submit" class="btn btn-primary">Update Car</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
+                    <p class="card-description">
+                      Car Image
+                    </p>
+                    <div class="row" >                      
+
+                      <div class="col-md-4">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">First Image</label>
+                          <div class="col-sm-9">
+                            <input name="imgA"  type="file" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Second Image</label>
+                          <div class="col-sm-9">
+                            <input name="imgB"  type="file" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Third Image</label>
+                          <div class="col-sm-9">
+                            <input name="imgC"  type="file" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                     
+                    </div>
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Car Remarks</label>
+                       <div class="col-sm-10">
+                    <input type="text" name="remarks" class="form-control form-control-lg" >
+                     </div>
+                  </div>
+                  </div>
+                </div>
+
+                   
+  <div class="row">
+    <div class="col-12 text-center">
+      <button type="submit" name="submit" class="btn btn-success ">Car Registration</button>
+      <button class="btn btn-light">Cancel</button>
+    </div>
+  </div>
 
 
-				</div>
-						  </fieldset>
-						</form>   
 
-					</div>
-				</div><!--/span-->
 
-			</div><!--/row-->
 
-			
-			
-    
+                      
+                  </form>
+                </div>
+              </div>
+            </div>
 
-	</div><!--/.fluid-container-->
-	
-			<!-- end: Content -->
-		</div><!--/#content.span10-->
-		</div><!--/fluid-row-->
 		
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body">
-			<p>Here settings can be configured...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
-		</div>
-	</div>
-	
-	<div class="clearfix"></div>
-	
-	<?php include('include/footer.php') ?>
-	
-	<?php } ?>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+           <?php include('common/footer.php') ?>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/misc.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+</body>
+
+</html>

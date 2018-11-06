@@ -1,16 +1,7 @@
 <?php
-session_start();
-error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
-  { 
-header('location:login');
-}
-else{  ?>
-
-<?php
 include('../db/config.php');
 
-
+ 
 
 if (isset($_POST['submit'])) {
 
@@ -39,116 +30,108 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
     </script>
 <?php } ?>
 
-<?php include('include/header.php');?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Star Admin Free Bootstrap-4 Admin Dashboard Template</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
 </head>
+
 <body>
-	
-	<?php include('include/sidebar.php');?>
-			
-			<noscript>
-				<div class="alert alert-block span10">
-					<h4 class="alert-heading">Warning!</h4>
-					<p>You need to have <a href="#" target="_blank">JavaScript</a> enabled to use this site.</p>
-				</div>
-			</noscript>
-			
-			<!-- start: Content -->
-			<div id="content" class="span10">
-			
-			
-			<ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index">Home</a>
-					<i class="icon-angle-right"></i> 
-				</li>
-				<li>
-					<i class="icon-edit"></i>
-					<a href="#">User Registration</a>
-				</li>
-			</ul>
-			
-			<div class="row-fluid sortable">
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Registration Form</h2>
-						
-					</div>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+   <?php include('common/navbar.php'); ?>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        
+      <!-- partial:partials/_sidebar.html -->
+      <?php include('common/sidebar.php'); ?>
+      <!-- partial -->
+      
+      <div class="main-panel">      	
+        <div class="content-wrapper">
+        	<div class="row">
 
-					<div class="box-content">
+        	 <div class="col-md-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">User Registration</h4>
+                  
+                  <form class="forms-sample" ction="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label>User Name </label>
+                      <input type="text" name="user_name"  class="form-control" placeholder="Enter User Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">Password</label>
+                      <input type="text" name="user_pass" class="form-control"  placeholder="Default Password" value="12345">
+                    </div>
+                    <div class="form-group">
+                      <label >User Contract</label>
+                      <input type="text" name="user_contract" class="form-control"  placeholder="Enter User Phone Number">
+                    </div>
+                    <div class="form-group">
+                      <label >User Office ID </label>
+                      <input type="text" name="user_officeId" class="form-control"  placeholder="Enter User Office ID">
+                    </div>
 
-						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-						  <fieldset>
+                    <div class="form-group">
+                      <label>User Image</label>
+                      
 
-						
-
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">User Name </label>
-							  <div class="controls">
-								<input type="text" name="user_name" class="span6 typeahead" placeholder="Enter User Name">
-							  </div>
-							</div>
-
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Password </label>
-							  <div class="controls">
-							  	<!-- <input type="hidden" name="user_pass" value="12345" /> -->
-								<input type="text" name="user_pass" class="span6 typeahead" placeholder="Default Password" value="12345" >
-							  </div>
-							</div>
-
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">User Contract </label>
-							  <div class="controls">
-								<input type="text" name="user_contract" class="span6 typeahead" placeholder="Enter User Phone Number" >
-							  </div>
-							</div>
+                      <div class="input-group col-xs-12">
+                        <input name="user_img"  type="file" class="form-control file-upload-info" placeholder="Upload Image">
+                        
+                      </div>
+                    </div>
 
 
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">User Office ID </label>
-							  <div class="controls">
-								<input type="text" name="user_officeId" class="span6 typeahead" placeholder="Enter User Office ID" >
-							  </div>
-							</div>
-							
-							<div class="control-group">
-							  <label class="control-label" for="fileInput">User Image </label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="user_img"  type="file">
-							  </div>
-							</div> 
-							
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
 		
-							<div class="form-actions">
-							  <button type="submit" name="submit" class="btn btn-primary">User Register</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+           <?php include('common/footer.php') ?>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/misc.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+</body>
 
-
-				</div>
-						  </fieldset>
-						</form>   
-
-					</div>
-				</div><!--/span-->
-
-			</div><!--/row-->
-
-			
-			
-    
-
-	</div><!--/.fluid-container-->
-	
-			<!-- end: Content -->
-		</div><!--/#content.span10-->
-		</div><!--/fluid-row-->
-		
-	
-	
-	<div class="clearfix"></div>
-	
-	<?php include('include/footer.php') ?>
-	
-	<?php } ?>
+</html>

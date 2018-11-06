@@ -1,0 +1,1 @@
+ <p class="footer-text text-center">copyright © 2018. Car Pull System @Powered By CPB-IT.</p>

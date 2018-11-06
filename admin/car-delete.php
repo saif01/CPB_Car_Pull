@@ -7,7 +7,7 @@ $id=$_GET['car_id'];
 	$query=mysqli_query($con,"DELETE FROM `tbl_car` WHERE `car_id`='$id' ");
 
 	
-header('location:car-table.php');
+header('location:car-all.php');
 }
 
 ?>

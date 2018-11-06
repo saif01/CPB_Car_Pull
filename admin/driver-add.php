@@ -1,16 +1,7 @@
 <?php
-session_start();
-error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
-  { 
-header('location:login');
-}
-else{  ?>
-
-<?php
 include('../db/config.php');
 
-
+ 
 if (isset($_POST['submit'])) {
 
 $driver_name=$_POST['driver_name'];
@@ -35,14 +26,32 @@ move_uploaded_file($_FILES["driver_img"]["tmp_name"],"p_img/driverimg/".$_FILES[
 ?>
 <script>
     alert('Update successfull.  !');
-    window.open('driver-all-info.php','_self');
+    window.open('driver-all','_self');
     </script>
-<?php } 
+<?php } ?>
 
- include('include/header.php');?>
+<!DOCTYPE html>
+<html lang="en">
 
- <script>
- 	
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Star Admin Free Bootstrap-4 Admin Dashboard Template</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
+
+  <script>
+  
 function userAvailability() {
 $("#loaderIcon").show();
 jQuery.ajax({
@@ -59,136 +68,143 @@ error:function (){}
 </script>
 
 </head>
+
 <body>
-	
-	<?php include('include/sidebar.php');?>
-			
-			
-			
-			<!-- start: Content -->
-			<div id="content" class="span10">
-			
-			
-			<ul class="breadcrumb">
-				<li>
-					<i class="icon-home"></i>
-					<a href="index">Home</a>
-					<i class="icon-angle-right"></i> 
-				</li>
-				<li>
-					<i class="icon-edit"></i>
-					<a href="#">Driver Add</a>
-				</li>
-			</ul>
-			
-			<div class="row-fluid sortable">
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Driver Add Form</h2>
-						
-					</div>
-					<div class="box-content">
-						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-						  <fieldset>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Driver Name </label>
-							  <div class="controls">
-								<input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="span6 typeahead" required="">
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+   <?php include('common/navbar.php'); ?>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        
+      <!-- partial:partials/_sidebar.html -->
+      <?php include('common/sidebar.php'); ?>
+      <!-- partial -->
+      
+      <div class="main-panel">      	
+        <div class="content-wrapper">
+        	<div class="row">
 
-								<span id="user-availability-status1" style="font-size:12px;"></span>
-							  </div>
-							</div>
+        	
+           <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Car Add Form</h4>
+                  <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+                    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
 
-							 <div class="control-group">
-								<label class="control-label" for="selectError3">For Car</label>
-								<div class="controls">
-<select name="for_car" class="form-control" required="">
-	<option value="">Select Car For Driver </option>
+                          <label class="col-sm-3 col-form-label">Driver Name </label>
+                          <div class="col-sm-9">
+                            
+                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" required="">
+
+                <span id="user-availability-status1" style="font-size:12px;"></span>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">For Car</label>
+                          <div class="col-sm-9">
+                            <select name="for_car" class="form-control" required="">
+  <option value="">Select Car For Driver </option>
 <?php
-	$query2=mysqli_query($con,"SELECT tbl_car.car_id,tbl_car.car_name,tbl_car.car_namePlate  FROM tbl_car LEFT JOIN car_driver ON ( tbl_car.car_id = car_driver.car_id) WHERE car_driver.car_id IS NULL");
+  $query2=mysqli_query($con,"SELECT tbl_car.car_id,tbl_car.car_name,tbl_car.car_namePlate  FROM tbl_car LEFT JOIN car_driver ON ( tbl_car.car_id = car_driver.car_id) WHERE car_driver.car_id IS NULL");
 
-			while ($row2 = mysqli_fetch_array($query2))
-			{
+      while ($row2 = mysqli_fetch_array($query2))
+      {
 echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2['car_namePlate']. "</option>" ;
 }
 ?>
 
 </select>
-								  
-								</div>
-							  </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
+                    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Driver Contract</label>
+                          <div class="col-sm-9">
+                           <input type="text" name="driver_phone" class="form-control" placeholder="Enter Driver Phone Number"  />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Driver NID</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="driver_nid" class="form-control" placeholder="Enter Driver NID" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Driver License</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="driver_license" class="form-control" placeholder="Enter Driver License" />
+                          </div>
+                        </div>
+                      </div>
 
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Driver Contract </label>
-							  <div class="controls">
-								<input type="text" name="driver_phone" class="span6 typeahead" required="" >
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Driver NID </label>
-							  <div class="controls">
-								<input type="text" name="driver_nid" class="span6 typeahead" >
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="typeahead">Driver License </label>
-							  <div class="controls">
-								<input type="text" name="driver_license" class="span6 typeahead" required="">
-							  </div>
-							</div>
-							
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Driver Image</label>
+                          <div class="col-sm-9">
+                            
+                            <input name="driver_img"  type="file" class="form-control"  />
 
-							<div class="control-group">
-							  <label class="control-label" for="fileInput">Driver Image</label>
-							  <div class="controls">
-								<input class="input-file uniform_on" name="driver_img"  type="file">
-							  </div>
-							</div>     
-							
-							
-							 
-										 
-							
-							<div class="form-actions">
-							  <button type="submit" name="submit" class="btn btn-primary">Update Car</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
+                          </div>
+                        </div>
+                      </div>                      
 
-					</div>
-				</div><!--/span-->
+                    </div>
+                                                        
+                      <div class="row">
+                        <div class="col-12 text-center">
+                          <button type="submit" name="submit" class="btn btn-success ">Car Registration</button>
+                          <button class="btn btn-light">Cancel</button>
+                        </div>
+                      </div>
 
-			</div><!--/row-->
+                   </form>
+                </div>
+              </div>
+            </div>
 
-			
-			
-    
-
-	</div><!--/.fluid-container-->
-	
-			<!-- end: Content -->
-		</div><!--/#content.span10-->
-		</div><!--/fluid-row-->
 		
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body">
-			<p>Here settings can be configured...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
-		</div>
-	</div>
-	
-	<div class="clearfix"></div>
-	
-	<?php include('include/footer.php') ?>
-	
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+           <?php include('common/footer.php') ?>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="vendors/js/vendor.bundle.addons.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/misc.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+</body>
 
-	<?php } ?>
+</html>
