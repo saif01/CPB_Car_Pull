@@ -1,4 +1,12 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
+
 include('../db/config.php');
 include('../db/calDB.php');
 
@@ -77,8 +85,8 @@ foreach($result as $row)
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">All Booked Information </h4>
-                  
+                  <!-- <h4 class="card-title">All Booked Information </h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">All Booked Information Show By Calendar</button>
               <!--     <div class="table-responsive"> -->
                    
 
@@ -158,9 +166,7 @@ foreach($result as $row)
 
 </script>
 
-
-
-
 </body>
-
 </html>
+
+<?php } ?>

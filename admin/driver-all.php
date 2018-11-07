@@ -1,4 +1,12 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
+
 include('../db/config.php');
 ?>
 <!DOCTYPE html>
@@ -54,8 +62,8 @@ include('../db/config.php');
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">All User Information </h4>
-                  
+                 <!--  <h4 class="card-title">All Driver Information </h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">All Driver Information</button>
                   <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                       <thead>
@@ -194,8 +202,7 @@ https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 } );
 </script>
 
-
-
 </body>
-
 </html>
+
+<?php } ?>

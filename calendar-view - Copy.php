@@ -6,9 +6,9 @@ if(strlen($_SESSION['username'])==0)
 header('location:index');
 }
 else{  
-include('include/config.php');
-include('cal/db.php');
-//$connect = new PDO('mysql:host=localhost;dbname=carPull', 'root', '123456');
+ include('db/config.php');
+include('db/calDB.php');
+$connect = new PDO('mysql:host=localhost;dbname=carpull', 'root', '123456');
 $car_id= $_GET['car_id'];
 
 $username= $_SESSION['username'];
@@ -68,9 +68,7 @@ if (isset($_POST['submit'])) {
 
         if ($days>=7) {
             
-        ?> <script>
-            alert('You can not Book More than Saven days   !!!!');
-            </script> <?php
+       $_SESSION['error']="7";
         }
 
         else{
@@ -81,15 +79,9 @@ if (isset($_POST['submit'])) {
 
                 if ($result > 0) 
                 {
-                    ?>
-                        <script>
-                        alert('This Car Already Booked At this Date  !!!!');
-                        //window.open('car-list3.php','_self');
-                        //location.reload();
-                        </script>
-                    <?php
-
-
+                    
+                    $_SESSION['error']="booked";
+                   
                 }
 
                 else
@@ -106,6 +98,7 @@ if (isset($_POST['submit'])) {
 
                     $query=mysqli_query($con,"INSERT INTO `car_booking`(`car_id`, `user_id`, `user_name`, `car_name`, `car_number`, `car_img`, `start_date`, `end_date`, `location`, `day_count`, `boking_status`) VALUES ('$car_id','$user_id','$username','$car_name','$car_nunber','$car_img','$start_book','$end_book','$location','$days','$status')");
 
+                    
                     ?>
                     <script>
                         alert('Update successfull..  !');
@@ -113,7 +106,7 @@ if (isset($_POST['submit'])) {
                         </script>
                     <?php 
 
-
+                     $_SESSION['error']="";
                 }
 
         }
@@ -158,16 +151,38 @@ if (isset($_POST['submit'])) {
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" /> -->
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" /> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
 
-<?php  include('include/manu.php'); ?>
+<style>
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
 
-   
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
+
+<?php  include('include/manu.php'); ?>
+  
 <script>
    
   $(document).ready(function() {
@@ -207,49 +222,49 @@ if (isset($_POST['submit'])) {
                     }
 
 
-function userAvailability() {
-$("#loaderIcon").show();
-jQuery.ajax({
-url: "data-count.php",
-data:'check_value='+$("#check_value").val(),
-type: "POST",
-success:function(data){
-$("#user-availability-status1").html(data);
-$("#loaderIcon").hide();
-},
-error:function (){}
-});
-}
-
-
 
                 </script>
-
-
-
-
 
     <!--== Header Area End ==-->
   </head>
   <body>
 
-
-    
+ 
 
 <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-8 m-auto">
+                <div class="col-lg-5 col-md-8 m-auto">
                   <div class="login-page-content">
             <div class="login-form">
-                      <h3>Car Booking Info. <span id="user-availability-status1" style="font-size:12px;"></span>
-                            </h3>
+                      <h3>Car Booking Info.</h3> 
+
+
+<?php if ($_SESSION['error']=="") {
+  echo htmlentities($_SESSION['error']="");
+
+}if($_SESSION['error']=="booked"){?>
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Sorry!</strong> This Car Booked By Another User!!!.
+</div>
+<?php
+echo htmlentities($_SESSION['error']="");
+ }if($_SESSION['error']=="7"){ ?>
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Sorry!</strong> You can not Book more than Saven days !!.
+</div>
+<?php 
+echo htmlentities($_SESSION['error']="");
+ } ?>
               <form action="" method="POST">
+
                 <div class="name">
                   <div class="row">
                     <div class="col-md-6">
                       <label>Pic-Up DATE:
-                                    <input type="date" id="date1"  name="start_date" placeholder="Pick Up Date" />
+                                    <input type="date" id="date1"  name="start_date" placeholder="Pick Up Date" required />
 
                                     <span class="first" "></span>
 
@@ -260,7 +275,7 @@ error:function (){}
                     <div class="col-md-6">
                                             <span id="user-availability-status1" style="font-size:12px;"></span>
                       <label>Return DATE: 
-                                        <input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" />
+                                        <input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" required />
 
                                         
                                           </label>
@@ -278,10 +293,12 @@ error:function (){}
 
                 <div class="row">
                     <div class="col-md-6">
+                       <div class="pickup-location book-item">
                       <label>Location: </label>
                                    <!--  <input type="text"  name="location" placeholder="location" /> -->
-                                   <select name="location" required=""> 
-                                    <option value="" >Select Location</option>
+                                   <select name="location" class="custom-select" required>
+                                   <option value="">Select Location</option> 
+                                    
 <?php
     $query2=mysqli_query($con,"SELECT `location` FROM `location`");
 
@@ -292,24 +309,27 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
 ?>
 
                                    </select>
-                                        
+                              </div>          
                     </div>
 
               <div class="col-md-6">
-
+                <div class="pickup-location book-item">
 
                       <label>Booking Time: </label>
-                                        <select name="for_car" class="" id="time_show" onChange="return show();" >
+                                        <select name="for_car" class="custom-select" id="time_show" onChange="return show();" >
                                                 <option value="">Full day </option>   
                                                 <option value="manual_input">Manual Input </option>
                                         </select>
                                           
-
-                              <div id="manual_input_show" class="name" style=" display:none; ">
+                                      </div>
+                            </div>  
+                            
+                            <div class="col-lg-12">        
+                              <div id="manual_input_show" class="pickup-location book-item " style=" display:none; ">
                                     <div class="row">
-                                        <div >
-                                            <label >Start time -:
-                                    <select name="start_time"> 
+                                        <div class="col-lg-6">
+                                            <label >Start time :
+                                    <select name="start_time" class="custom-select" > 
                                         <option value="01:00:00">Select Time </option>
                                             <option value="09:00:00">9.00 AM </option>
                                             <option value="09:30:00">9.30 AM </option>
@@ -334,9 +354,10 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
                                          </select>
                                             </label>
                                         </div>
-                                        <div >
-                                            <label>Return Time 
-                                        <select name="return_time"> 
+
+                                        <div  class="col-md-6">
+                                            <label>Return Time :
+                                        <select name="return_time" class="custom-select"> 
                                           <option value="23:59:00">Select Time </option>
                                             <option value="09:00:00">9.00 AM </option>
                                             <option value="09:30:00">9.30 AM </option>
@@ -364,6 +385,7 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
                                         
                                     </div>
                                 </div>
+
                     </div>
                   </div>
 
@@ -384,7 +406,7 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
           </div>
 
 
-<div class="col-lg-8 col-md-8 m-auto">
+<div class="col-lg-7 col-md-8 m-auto">
                   <div class="login-page-content">
                    
                     
@@ -397,17 +419,16 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
                 </div>
 
 
-
-
-
-
-
-
-
-
 </div>
 </div>
 </section>
+
+
+
+
+
+
+
 
 <!--== Footer Area Start ==-->
     <section id="footer-area">
@@ -419,7 +440,7 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <p>
-Copyright &copy;<script>document.write(new Date().getFullYear()); </script> C.P.Bangladesh<i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank"> </a> CPB.
+Copyright &copy;<script>document.write(new Date().getFullYear()); </script> C.P.Bangladesh<i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank"> </a> CPB-IT.
 </p>
                     </div>
                 </div>
@@ -443,6 +464,40 @@ Copyright &copy;<script>document.write(new Date().getFullYear()); </script> C.P.
     <!--=== Jquery Migrate Min Js ===-->
    <!--  <script src="assets/js/jquery-migrate.min.js"></script>
  -->
+
+
+<!--=== Jquery Min Js ===-->
+   <!--  <script src="assets/js/jquery-3.2.1.min.js"></script> -->
+    <!--=== Jquery Migrate Min Js ===-->
+    <script src="assets/js/jquery-migrate.min.js"></script>
+    <!--=== Popper Min Js ===-->
+    <script src="assets/js/popper.min.js"></script>
+    <!--=== Bootstrap Min Js ===-->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!--=== Gijgo Min Js ===-->
+    <script src="assets/js/plugins/gijgo.js"></script>
+    <!--=== Vegas Min Js ===-->
+
+    <script src="assets/js/plugins/vegas.min.js"></script>
+    <!--=== Isotope Min Js ===-->
+    <script src="assets/js/plugins/isotope.min.js"></script>
+    <!--=== Owl Caousel Min Js ===-->
+    <script src="assets/js/plugins/owl.carousel.min.js"></script>
+    <!--=== Waypoint Min Js ===-->
+    <script src="assets/js/plugins/waypoints.min.js"></script>
+
+
+    <!--=== CounTotop Min Js ===-->
+    <script src="assets/js/plugins/counterup.min.js"></script>
+    <!--=== YtPlayer Min Js ===-->
+    <script src="assets/js/plugins/mb.YTPlayer.js"></script>
+    <!--=== Magnific Popup Min Js ===-->
+    <script src="assets/js/plugins/magnific-popup.min.js"></script>
+    <!--=== Slicknav Min Js ===-->
+    <script src="assets/js/plugins/slicknav.min.js"></script>
+<!--=== Mian Js ===-->
+    <script src="assets/js/main.js"></script>
+
 
 
 

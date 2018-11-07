@@ -1,4 +1,11 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
 
 include('../db/config.php');
 
@@ -9,10 +16,6 @@ $query=mysqli_query($con,"SELECT * FROM `user` WHERE `user_id`='$user_id' ");
 
 $row=$query->fetch_assoc();
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,5 +126,6 @@ $row=$query->fetch_assoc();
   <script src="js/misc.js"></script>
   <!-- endinject -->
 </body>
-
 </html>
+
+<?php } ?>

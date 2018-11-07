@@ -1,4 +1,12 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
+
 include('../db/config.php');
 ?>
 <!DOCTYPE html>
@@ -57,11 +65,8 @@ include('../db/config.php');
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Specific Booked Information </h4>
+                  <button  class="card-title btn btn-outline btn-block ">Report Show By Date</button>
 
-
-
-                  
 <form  action="" method="post" >
 	
 			
@@ -111,11 +116,11 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
 
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-5 col-form-label"></label>
-                          <div class="col-sm-7">
+                          <label class="col-sm-3 col-form-label"></label>
+                          <div class="col-sm-9">
                       	
-                        <button type="submit" name="submit" class="btn btn-success ">Submit</button>
-                       <button class="btn btn-light">Cancel</button>
+                        <button type="submit" name="submit" class="btn btn-info btn-block btn-rounded">View Report</button>
+                       <!-- <button class="btn btn-light btn-block">Cancel</button> -->
                       </div>
                   </div>
                     </div>
@@ -302,5 +307,5 @@ https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 
 </body>
-
 </html>
+<?php } ?>

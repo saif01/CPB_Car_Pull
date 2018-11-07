@@ -1,4 +1,11 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
 
 include('../db/config.php');
 
@@ -201,5 +208,6 @@ $row=$query->fetch_assoc();
   <script src="js/misc.js"></script>
   <!-- endinject -->
 </body>
-
 </html>
+
+<?php } ?>

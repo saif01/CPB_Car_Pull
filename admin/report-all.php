@@ -1,4 +1,12 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
+
 include('../db/config.php');
 ?>
 <!DOCTYPE html>
@@ -56,8 +64,8 @@ include('../db/config.php');
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">All Booked Information </h4>
-                  
+                  <!-- <h4 class="card-title">All Booked Information </h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">All Booked Information</button>
                   <div class="table-responsive ">
                     <table id="example" class="table table-striped table-bordered table-responsive-md col-lg-12" >
                       <thead>
@@ -96,10 +104,9 @@ include('../db/config.php');
 
                 </td>
                 
+                <td ><?php echo date("M j, Y, g:i a", strtotime($row['start_date'])); ?></td>
 
-                <td ><?php echo date("F j, Y, g:i a", strtotime($row['start_date'])); ?></td>
-
-                <td class="center"><?php echo date("F j, Y, g:i a", strtotime($row['end_date'])); ?></td>
+                <td class="center"><?php echo date("M j, Y, g:i a", strtotime($row['end_date'])); ?></td>
 
 
                 <td class="center"><?php echo htmlentities($row['location']); ?></td>
@@ -211,8 +218,7 @@ https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 } );
 </script>
 
-
-
 </body>
-
 </html>
+
+<?php } ?>

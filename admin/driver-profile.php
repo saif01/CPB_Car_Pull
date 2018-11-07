@@ -1,7 +1,13 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
 
 include('../db/config.php');
-
 $driver_id=$_GET['driver_id'];
 
 $query=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' ");
@@ -125,5 +131,6 @@ $row=$query->fetch_assoc();
   <script src="js/misc.js"></script>
   <!-- endinject -->
 </body>
-
 </html>
+
+<?php } ?>

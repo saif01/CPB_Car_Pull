@@ -6,6 +6,7 @@ if(strlen($_SESSION['adminName'])==0)
 header('location:login');
 }
 else{ 
+
 include('../db/config.php');
 ?>
 <!DOCTYPE html>
@@ -27,6 +28,21 @@ include('../db/config.php');
   <link rel="stylesheet" href="css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
+
+
+
+<script language="javascript" type="text/javascript">
+            var popUpWin = 0;
+
+            function popUpWindow(URLStr, left, top, width, height) {
+                if (popUpWin) {
+                    if (!popUpWin.closed) popUpWin.close();
+                }
+                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 780 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+            }
+        </script>
+
+
 </head>
 
 <body>
@@ -48,61 +64,57 @@ include('../db/config.php');
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                 <!--  <h4 class="card-title">All User Information </h4> -->
-                  <button  class="card-title btn btn-outline btn-block ">All User Information</button>
-                  <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <!-- <h4 class="card-title">All Booked Information </h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">User Login Log Information</button>
+                  <div class="table-responsive ">
+                    <table id="example" class="table table-striped table-bordered table-responsive-md col-lg-12" >
                       <thead>
-                        <tr>
-							  	 <th>Image</th>
-								  <th>Name</th>
-								  <th>Phone</th>
-								  <th>Office ID</th>
-								  
-								  <th>Actions</th>
-								  <th>Actions</th>
-							  </tr>
+                         <tr >
+                 <th>id</th>
+                   <th>User</th>
+                   <th>User IP</th>
+                 <th>LogIn</th>
+                 <th>LogOut</th>
+                 <th>User OS</th> 
+                 <th>Browser</th>             
+                 <th>User Device</th>
+                 <th>User Status</th>
+               
+                  
+                </tr>
                       </thead>
                       <tbody>
                        <?php 
-		$query=mysqli_query($con," SELECT * FROM `user`");
-		while($row=mysqli_fetch_array($query))
-		{
-
+    $query=mysqli_query($con," SELECT * FROM `loginlog` ORDER BY `login_id` DESC");
+    while($row=mysqli_fetch_array($query))
+    {
+ 
 ?>
-							<tr>
+              <tr>
+                <td class="center" ><?php echo htmlentities($row['login_id']) ; ?></td>
+                <td class="center" ><?php echo htmlentities($row['user_name']) ; ?></td>
+                <td class="center"><?php echo htmlentities($row['user_ip']); ?></td>
+                <td class="center"><?php echo date("M j, Y, g:i a", strtotime($row['logIn'])); ?></td>
+                <td class="center"><?php echo $row['logOut'];?></td>
+                <td class="center"><?php echo htmlentities($row['user_os']); ?></td>
+                <td class="center"><?php echo htmlentities($row['user_browser']); ?></td>
+                
+                <td class="center"><?php echo htmlentities($row['user_device']); ?></td>
 
-								<td > <img src="p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="50" width="50"/>  </td>
-								<td class="center" ><?php echo htmlentities($row['user_name']) ; ?></td>
-								<td class="center"><?php echo htmlentities($row['user_contract']); ?></td>
-								<td class="center"><?php echo htmlentities($row['user_officeId']); ?></td>
-								
-								<td class="center">   
-								<?php
-                                         if($row['user_status']==1)
-                                         {?>
-                                        <a href="user-status.php?h_user_id=<?php echo htmlentities($row['user_id']);?>" onclick="return confirm('Are you sure you want to Deactive this ** User **?');"><button class="btn btn-primary"> <i class="icon-ok-circle"> Active</i></button>
-                                            
-                                        <?php } else {?>
+                <td class="center"><?php 
+                $st=$row['user_status']; 
+                if ($st==1) {
+                  echo "Active";
+                }else{echo "Deactive";}
 
-                                            <a href="user-status.php?s_user_id=<?php echo htmlentities($row['user_id']);?>" onclick="return confirm('Are you sure you want to Active this ** User **?');"><button class="btn btn-danger"><i class="icon-ban-sign"> Deactive </i></button> 
-                                            <?php } ?>
-                                          
 
-								</td>
-								<td class="center">
-									
-									<!-- <a class="btn btn-info" href="user-update.php?user_id=<?php echo $row['user_id'] ?>">
-										Edit
-									</a> -->
-									
-										 <a href="user-delete.php?user_id=<?php echo $row['user_id']?>" onClick="return confirm('Are you sure you want to delete???')"><button type="button" class="btn btn-danger" ><i class="icon-remove-sign"> Delete</i></button></a>
-									</a>
-								</td>
-							</tr>
-			<?php } ?>	
-							
-						  </tbody>
+                ?></td>
+                
+                
+              </tr>
+      <?php } ?>  
+              
+              </tbody>
                     </table>
                   </div>
                 </div>
@@ -151,21 +163,20 @@ https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
 
 
+
+
 <script type="text/javascript">
   
   $(document).ready(function() {
     var table = $('#example').DataTable( {
-        // lengthChange: false,
-        // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+        lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
     } );
  
-    // table.buttons().container()
-    //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
 } );
 </script>
-
-
-
 </body>
 </html>
 

@@ -1,8 +1,14 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
+
 include('../db/config.php');
-
  
-
 if (isset($_POST['submit'])) {
 
 $car_name=$_POST['car_name'];
@@ -45,7 +51,7 @@ $query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `c
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Star Admin Free Bootstrap-4 Admin Dashboard Template</title>
+  <title>CPB.CarPull</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -77,7 +83,8 @@ $query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `c
         	 <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Car Add Form</h4>
+                  <!-- <h4 class="card-title">Car Add Form</h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">Car Add Form</button>
                   <form class="form-sample" action="" method="post" enctype="multipart/form-data">
                     
                     <div class="row">
@@ -285,8 +292,8 @@ $query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `c
                    
   <div class="row">
     <div class="col-12 text-center">
-      <button type="submit" name="submit" class="btn btn-success ">Car Registration</button>
-      <button class="btn btn-light">Cancel</button>
+      <button type="submit" name="submit" class="btn btn-success btn-block btn-rounded">Car Registration</button>
+      <button class="btn btn-light btn-block btn-rounded">Cancel</button>
     </div>
   </div>
 
@@ -326,5 +333,5 @@ $query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `c
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
 </body>
-
 </html>
+<?php } ?>

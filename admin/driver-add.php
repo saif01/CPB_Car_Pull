@@ -1,7 +1,14 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['adminName'])==0)
+  { 
+header('location:login');
+}
+else{ 
+
 include('../db/config.php');
 
- 
 if (isset($_POST['submit'])) {
 
 $driver_name=$_POST['driver_name'];
@@ -37,7 +44,7 @@ move_uploaded_file($_FILES["driver_img"]["tmp_name"],"p_img/driverimg/".$_FILES[
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Star Admin Free Bootstrap-4 Admin Dashboard Template</title>
+  <title>CPB.CarPull</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -88,7 +95,8 @@ error:function (){}
            <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Car Add Form</h4>
+                  <!-- <h4 class="card-title">Car Add Form</h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">Driver Add Form</button>
                   <form class="form-sample" action="" method="post" enctype="multipart/form-data">
                     
                     <div class="row">
@@ -98,7 +106,7 @@ error:function (){}
                           <label class="col-sm-3 col-form-label">Driver Name </label>
                           <div class="col-sm-9">
                             
-                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" required="">
+                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" required>
 
                 <span id="user-availability-status1" style="font-size:12px;"></span>
 
@@ -109,7 +117,7 @@ error:function (){}
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">For Car</label>
                           <div class="col-sm-9">
-                            <select name="for_car" class="form-control" required="">
+                            <select name="for_car" class="form-control" required>
   <option value="">Select Car For Driver </option>
 <?php
   $query2=mysqli_query($con,"SELECT tbl_car.car_id,tbl_car.car_name,tbl_car.car_namePlate  FROM tbl_car LEFT JOIN car_driver ON ( tbl_car.car_id = car_driver.car_id) WHERE car_driver.car_id IS NULL");
@@ -132,7 +140,7 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Driver Contract</label>
                           <div class="col-sm-9">
-                           <input type="text" name="driver_phone" class="form-control" placeholder="Enter Driver Phone Number"  />
+                           <input type="text" name="driver_phone" class="form-control" placeholder="Enter Driver Phone Number"  required />
                           </div>
                         </div>
                       </div>
@@ -140,7 +148,7 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Driver NID</label>
                           <div class="col-sm-9">
-                            <input type="text" name="driver_nid" class="form-control" placeholder="Enter Driver NID" />
+                            <input type="text" name="driver_nid" class="form-control" placeholder="Enter Driver NID" required />
                           </div>
                         </div>
                       </div>
@@ -150,7 +158,7 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Driver License</label>
                           <div class="col-sm-9">
-                            <input type="text" name="driver_license" class="form-control" placeholder="Enter Driver License" />
+                            <input type="text" name="driver_license" class="form-control" placeholder="Enter Driver License"  required/>
                           </div>
                         </div>
                       </div>
@@ -160,7 +168,7 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                           <label class="col-sm-3 col-form-label">Driver Image</label>
                           <div class="col-sm-9">
                             
-                            <input name="driver_img"  type="file" class="form-control"  />
+                            <input name="driver_img"  type="file" class="form-control" required />
 
                           </div>
                         </div>
@@ -170,8 +178,8 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                                                         
                       <div class="row">
                         <div class="col-12 text-center">
-                          <button type="submit" name="submit" class="btn btn-success ">Car Registration</button>
-                          <button class="btn btn-light">Cancel</button>
+                          <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Car Registration</button>
+                          <button class="btn btn-light btn-block btn-rounded ">Cancel</button>
                         </div>
                       </div>
 
@@ -206,5 +214,6 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
 </body>
-
 </html>
+
+<?php } ?>

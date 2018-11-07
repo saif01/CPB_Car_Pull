@@ -48,60 +48,56 @@ include('../db/config.php');
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                 <!--  <h4 class="card-title">All User Information </h4> -->
-                  <button  class="card-title btn btn-outline btn-block ">All User Information</button>
+                  <!-- <h4 class="card-title">All User Information </h4> -->
+                  <button  class="card-title btn btn-outline btn-block ">All Admin Information</button>
                   <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
-							  	 <th>Image</th>
-								  <th>Name</th>
-								  <th>Phone</th>
-								  <th>Office ID</th>
-								  
-								  <th>Actions</th>
-								  <th>Actions</th>
+							  	 
+                    <th>Img</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Office ID</th>                  
+                  <th>Actions</th>
+                  <th>Actions</th>
+               
 							  </tr>
                       </thead>
                       <tbody>
                        <?php 
-		$query=mysqli_query($con," SELECT * FROM `user`");
-		while($row=mysqli_fetch_array($query))
-		{
+		$query=mysqli_query($con,"SELECT * FROM `admin` ORDER BY `admin_id` DESC");
+    while($row=mysqli_fetch_array($query))
+    {
 
 ?>
-							<tr>
+              <tr>
 
-								<td > <img src="p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="50" width="50"/>  </td>
-								<td class="center" ><?php echo htmlentities($row['user_name']) ; ?></td>
-								<td class="center"><?php echo htmlentities($row['user_contract']); ?></td>
-								<td class="center"><?php echo htmlentities($row['user_officeId']); ?></td>
-								
-								<td class="center">   
-								<?php
-                                         if($row['user_status']==1)
+                <td > <img src="p_img/adminimg/<?php echo($row['admin_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  </td>
+                <td class="center" ><?php echo htmlentities($row['admin_name']) ; ?></td>
+                <td class="center"><?php echo htmlentities($row['admin_phone']); ?></td>
+                <td class="center"><?php echo htmlentities($row['admin_officeID']); ?></td>
+                
+                <td class="center">   
+                <?php
+                                         if($row['admin_status']==1)
                                          {?>
-                                        <a href="user-status.php?h_user_id=<?php echo htmlentities($row['user_id']);?>" onclick="return confirm('Are you sure you want to Deactive this ** User **?');"><button class="btn btn-primary"> <i class="icon-ok-circle"> Active</i></button>
+                                        <a href="admin-status.php?h_admin_id=<?php echo htmlentities($row['admin_id']);?>" onclick="return confirm('Are you sure you want to Deactive this ** Admin **?');"><button class="btn btn-primary"> <i class="icon-ok-circle"> Active</i></button>
                                             
                                         <?php } else {?>
 
-                                            <a href="user-status.php?s_user_id=<?php echo htmlentities($row['user_id']);?>" onclick="return confirm('Are you sure you want to Active this ** User **?');"><button class="btn btn-danger"><i class="icon-ban-sign"> Deactive </i></button> 
+                                            <a href="admin-status.php?s_admin_id=<?php echo htmlentities($row['admin_id']);?>" onclick="return confirm('Are you sure you want to Active this ** Admin **?');"><button class="btn btn-danger"><i class="icon-ban-sign"> Deactive </i></button> 
                                             <?php } ?>
                                           
 
-								</td>
-								<td class="center">
-									
-									<!-- <a class="btn btn-info" href="user-update.php?user_id=<?php echo $row['user_id'] ?>">
-										Edit
-									</a> -->
-									
-										 <a href="user-delete.php?user_id=<?php echo $row['user_id']?>" onClick="return confirm('Are you sure you want to delete???')"><button type="button" class="btn btn-danger" ><i class="icon-remove-sign"> Delete</i></button></a>
-									</a>
-								</td>
-							</tr>
-			<?php } ?>	
-							
+                </td>
+                <td class="center">
+                                    
+                     <a href="admin-delete.php?admin_id=<?php echo $row['admin_id']?>" onClick="return confirm('Are you sure you want to delete.???')"><button type="button" class="btn btn-danger" ><i class="icon-remove-sign"> Delete</i></button></a>
+                  </a>
+                </td>
+              </tr>
+      <?php } ?>  
 						  </tbody>
                     </table>
                   </div>

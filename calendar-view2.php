@@ -97,13 +97,16 @@ foreach($result as $row)
     <link href="assets/css/responsive.css" rel="stylesheet">
 
 
+<!-- For Calendar Load Links -->
+<link href='admin/cal/fullcalendar.min.css' rel='stylesheet' />
+<link href='admin/cal/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='admin/cal/lib/moment.min.js'></script>
+<script src='admin/cal/lib/jquery.min.js'></script>
+<script src='admin/cal/fullcalendar.min.js'></script>
+<script src='admin/cal/locale-all.js'></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+
 
 <?php include('include/manu.php');?>
   
@@ -122,27 +125,35 @@ foreach($result as $row)
 
             </div>
 
+<script>
 
- <script>
-   
   $(document).ready(function() {
-   var calendar = $('#calendar').fullCalendar({
-    editable:true,
-    header:{
-     left:'prev,next today',
-     center:'title',
-     right:'month,agendaWeek,agendaDay'
-    },
-    //events: 'cal/load.php',
-    events: <?php echo json_encode($data); ?>,
-    //selectable:true,
-    selectHelper:true,
+    var initialLocaleCode = 'en';
 
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listMonth'
+      },
+      //defaultDate: '2018-03-12',
+      locale: initialLocaleCode,
+      buttonIcons: false, // show the prev/next text
+      weekNumbers: true,
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: <?php echo json_encode($data); ?>
+        
+    });
 
-   });
+    
   });
-   
-  </script>
+
+</script>
+
+
+ 
 
 <script language="javascript" type="text/javascript">
             var popUpWin = 0;

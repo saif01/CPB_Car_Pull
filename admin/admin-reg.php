@@ -10,26 +10,26 @@ include('../db/config.php');
 
 if (isset($_POST['submit'])) {
 
-$user_name=$_POST['user_name'];
-$user_pass=$_POST['user_pass'];
-$user_contract=$_POST['user_contract'];
-$user_officeId=$_POST['user_officeId'];
+$admin_name=$_POST['admin_name'];
+$admin_pass=$_POST['admin_pass'];
+$admin_contract=$_POST['admin_contract'];
+$admin_officeId=$_POST['admin_officeId'];
 
 //$compfile=$_FILES["compfile"]["name"]; 
-$user_img=$_FILES["user_img"]["name"];
+$admin_img=$_FILES["admin_img"]["name"];
 
-$user_status = 1;
+$admin_status = 1;
 
-move_uploaded_file($_FILES["user_img"]["tmp_name"],"p_img/userImg/".$_FILES["user_img"]["name"]);
+move_uploaded_file($_FILES["admin_img"]["tmp_name"],"p_img/adminimg/".$_FILES["admin_img"]["name"]);
 
 
-$query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_contract`, `user_img`, `user_officeId`, `user_status`) VALUES ('$user_name','$user_pass','$user_contract','$user_img','$user_officeId','$user_status')");
+$query=mysqli_query($con,"INSERT INTO `admin`(`admin_name`, `admin_password`, `admin_img`, `admin_phone`, `admin_officeID`, `admin_status`) VALUES ('$admin_name','$admin_pass','$admin_img','$admin_contract','$admin_officeId','$admin_status')");
 
 
 ?>
 <script>
     alert('Update successfull.  !');
-    window.open('user-all-info','_self'); //for locating other page.
+    window.open('admin-all.php','_self'); //for locating other page.
     //window.location.reload(); //For reload Same page
 
     </script>
@@ -60,7 +60,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
 function userAvailability() {
 $("#loaderIcon").show();
 jQuery.ajax({
-url: "check_availabe_user.php",
+url: "check_availabe_admin.php",
 data:'check_value='+$("#check_value").val(),
 type: "POST",
 success:function(data){
@@ -97,8 +97,8 @@ error:function (){}
                   
                   <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label>User Name </label>
-                      <input type="text" id="check_value" onBlur="userAvailability()" name="user_name"  class="form-control" placeholder="Enter User Name" required>
+                      <label>Admin Name Or ID </label>
+                      <input type="text" name="admin_name" id="check_value" onBlur="userAvailability()"  class="form-control" placeholder="Enter User Name" required>
                       <span id="user-availability-status1" style="font-size:12px;"></span>
 
                     </div>
@@ -106,29 +106,29 @@ error:function (){}
 
                     <div class="form-group">
                       <label for="exampleInputEmail3">Password</label>
-                      <input type="text" name="user_pass" class="form-control"  placeholder="Default Password" value="12345">
+                      <input type="text" name="admin_pass" class="form-control"  placeholder="Default Password" value="12345">
                     </div>
                     <div class="form-group">
-                      <label >User Contract</label>
-                      <input type="text" name="user_contract" class="form-control"  placeholder="Enter User Phone Number" required>
+                      <label >Admin Contract</label>
+                      <input type="text" name="admin_contract" class="form-control"  placeholder="Enter Admin Phone Number" required>
                     </div>
                     <div class="form-group">
-                      <label >User Office ID </label>
-                      <input type="text" name="user_officeId" class="form-control"  placeholder="Enter User Office ID" required>
+                      <label >Admin Office ID </label>
+                      <input type="text" name="admin_officeId" class="form-control"  placeholder="Enter Admin Office ID" required>
                     </div>
 
                     <div class="form-group">
-                      <label>User Image</label>
+                      <label>Admin Image</label>
                       
 
-                      <div class="input-group col-xs-12">
-                        <input name="user_img"  type="file" class="form-control file-upload-info" placeholder="Upload Image" required>
+                      
+                        <input name="admin_img"  type="file" class="form-control file-upload-info" placeholder="Upload Image" required>
                         
-                      </div>
+                      
                     </div>
 
 
-                    <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">User Registration</button>
+                    <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Admin Registration</button>
                     <button class="btn btn-light btn-block btn-rounded">Cancel</button>
                   </form>
                 </div>
