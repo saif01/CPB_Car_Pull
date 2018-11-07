@@ -1,6 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
 
-<style type="text/css">
+<!-- <style type="text/css">
   .profile-image-s{
     /*border-radius: 10px 20px;*/
     border-radius: 5px;
@@ -10,15 +10,15 @@
     height: 50px;
   }
 
-</style>
+</style> -->
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">
               <a href="index">
               <div class="user-wrapper">
-                <div class="profile-image-s">
+                <div class="profile-image">
 
-                  <img src="../cpb.png" alt="profile image">
+                  <img src="images/favicon.png" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name">Car Pull </p>
