@@ -117,7 +117,7 @@ foreach($result as $row)
    <img src="">
     <a href="javascript:void(0);" onClick="popUpWindow('booking-popup.php?car_id=<?php echo$car_id;?>');" title="View Driver Info.">
 
-      Calender View Of <b> <?php echo $row["car_name"]; ?></b> Car Number <b> <?php echo $row["car_number"]; ?></b> <button class="btn btn-danger" >Booking Now</button> </a></h3>
+      Calender View Of <b> <?php echo $row["car_name"]; ?></b> Car Number <b> <?php echo $row["car_number"]; ?></b> <button class="btn btn-outline-danger" >Booking Now</button> </a></h3>
   <br />
             <div class="container">
 

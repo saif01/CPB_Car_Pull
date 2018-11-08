@@ -155,7 +155,7 @@ $user_id= $_SESSION['user_id'];
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 
-
+ 
 
 
 
@@ -163,12 +163,12 @@ $user_id= $_SESSION['user_id'];
   
 $(document).ready(function() {
     var table = $('#example').DataTable( {
-        //lengthChange: false,
-        //buttons: [ 'copy', 'excel', 'pdf' ]
+        // lengthChange: false,
+        // buttons: [ 'copy', 'excel', 'pdf' ]
     } );
  
-    //table.buttons().container()
-       // .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+    // table.buttons().container()
+    //    .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
 } );
 </script>
 

@@ -29,7 +29,7 @@
                                
                                 
                                                                 
-                                 <li style="font-size:16px;"> <a href="user-info"> <?php echo htmlentities($_SESSION['username']); ?> </a>
+                                 <li style="font-size:16px;"> <a href="#"> <?php echo htmlentities($_SESSION['username']); ?> </a>
                                     <ul>
                                         <li><a href="user-booked-car">My Booked Car</a></li>
                                         <li><a href="user-noncommented-car">None Commented </a></li>

@@ -6,7 +6,7 @@ if(strlen($_SESSION['username'])==0)
 header('location:index');
 }
 else{  
-
+ 
 include('db/config.php');
 
 $user_id=$_SESSION['user_id'];
@@ -60,9 +60,9 @@ if (isset($_POST['submit'])) {
                     ?>
                         <script>
 
-                          Alert.on("This Car Already Booked At this Date  !!!!");
+                          
 
-                        //alert('This Car Already Booked At this Date  !!!!');
+                        alert('This Car Already Booked At this Date  !!!!');
                         //window.open('car-list3.php','_self');
                         //location.reload();
                         </script>

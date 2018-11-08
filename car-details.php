@@ -119,8 +119,8 @@ while($row=mysqli_fetch_array($query))
                                                     }else{echo "No";}?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>GearBox</th>
-                                                    <td><?php echo $row['car_gearbox'];?></td>
+                                                    <th>Capacity</th>
+                                                    <td><?php echo $row['car_capacity'];?></td>
                                                 </tr> 
                                                 
                                                 
