@@ -230,8 +230,6 @@ if (isset($_POST['submit'])) {
 
                     }
 
-
-
                 </script>
 
     <!--== Header Area End ==-->
@@ -243,79 +241,65 @@ if (isset($_POST['submit'])) {
 <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-8 m-auto">
+                <div class="col-lg-6 col-md-8 m-auto">
                   <div class="login-page-content">
-            <div class="login-form">
+					           <div class="login-form">
                       <h3>Car Booking Info.</h3> 
 
+          						<?php if ($_SESSION['error']=="") {
+          						  echo htmlentities($_SESSION['error']="");
 
-<?php if ($_SESSION['error']=="") {
-  echo htmlentities($_SESSION['error']="");
+          						}if($_SESSION['error']=="booked"){?>
+          						<div class="alert">
+          						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          						  <strong>Sorry!</strong> This Car Booked By Another User!!!.
+          						</div>
+          						<?php
+          						echo htmlentities($_SESSION['error']="");
+          						 }if($_SESSION['error']=="7"){ ?>
+          						<div class="alert">
+          						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          						  <strong>Sorry!</strong> You can not Book more than Saven days !!.
+          						</div>
+          						<?php 
+          						echo htmlentities($_SESSION['error']="");
+          						 } ?>
 
-}if($_SESSION['error']=="booked"){?>
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Sorry!</strong> This Car Booked By Another User!!!.
-</div>
-<?php
-echo htmlentities($_SESSION['error']="");
- }if($_SESSION['error']=="7"){ ?>
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Sorry!</strong> You can not Book more than Saven days !!.
-</div>
-<?php 
-echo htmlentities($_SESSION['error']="");
- } ?>
               <form action="" method="POST">
+                
 
-                <div class="name">
                   <div class="row">
                     <div class="col-md-6">
                       <label>Pic-Up DATE:
-                                    <input type="date" id="date1"  name="start_date" placeholder="Pick Up Date" required />
-
-                                    <span class="first" "></span>
-
-                                        </label>
-
-
+                          <input type="date"  name="start_date" placeholder="Pick Up Date" required />
+                       </label>
                     </div>
-                    <div class="col-md-6">
-                                            <span id="user-availability-status1" style="font-size:12px;"></span>
-                      <label>Return DATE: 
-                                        <input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" required />
-
-                                        
-                                          </label>
-
-                                            
+                    <div class="col-md-6" >
+                      <span id="user-availability-status1" style="font-size:12px;"></span>
+                        <label>Return DATE: 
+                            <input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" required />                                        
+                        </label>                                            
                     </div>
                   </div>
+                
 
-                </div>
-                <!-- <div class="username">
-                  <label>Location:  
-                                        <input type="text"  name="location" placeholder="Where You Go" />
-                                          </label>
-                </div> -->
-
+          
                 <div class="row">
                     <div class="col-md-6">
                        <div class="pickup-location book-item">
-                      <label>Location: </label>
-                                   <!--  <input type="text"  name="location" placeholder="location" /> -->
-                                   <select name="location" class="custom-select" required>
-                                   <option value="">Select Location</option> 
+                      <label>Choose Location : </label>
+                                  
+                        <select name="location" class="custom-select" required>
+                            <option value="">Select Location</option> 
                                     
-<?php
-    $query2=mysqli_query($con,"SELECT `location` FROM `location`");
+									<?php
+										$query2=mysqli_query($con,"SELECT `location` FROM `location`");
 
-            while ($row2 = mysqli_fetch_array($query2))
-            {
-echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>" ;
-}
-?>
+												while ($row2 = mysqli_fetch_array($query2))
+												{
+									echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>" ;
+									}
+									?>
 
                                    </select>
                               </div>          
@@ -324,14 +308,14 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
               <div class="col-md-6">
                 <div class="pickup-location book-item">
 
-                      <label>Booking Time: </label>
-                                        <select name="for_car" class="custom-select" id="time_show" onChange="return show();" >
-                                                <option value="">Full day </option>   
-                                                <option value="manual_input">Manual Input </option>
-                                        </select>
+                      <label>Booking Time : </label>
+                            <select name="for_car" class="custom-select" id="time_show" onChange="return show();" >
+                                  <option value="">Full day </option>   
+                                  <option value="manual_input">Manual Input </option>
+                            </select>
                                           
-                                      </div>
-                            </div>  
+                    </div>
+                </div>  
                             
                             <div class="col-lg-12">        
                               <div id="manual_input_show" class="pickup-location book-item " style=" display:none; ">
@@ -394,8 +378,7 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
                                         
                                     </div>
                                 </div>
-
-                    </div>
+                           </div>
                   </div>
 
                 
@@ -407,25 +390,16 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
               </form>
                     </div>
  
-            
- 
-
 
                 </div>
           </div>
 
 
-<div class="col-lg-7 col-md-8 m-auto">
+        <div class="col-lg-6 col-md-8 m-auto">
                   <div class="login-page-content">
-                   
-                    
-<div id="calendar"></div>
-                    
-                  </div>
-
-
-                    
-                </div>
+                          <div id="calendar"></div>                    
+                  </div>                    
+        </div>
 
 
 </div>

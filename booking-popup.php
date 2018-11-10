@@ -107,32 +107,6 @@ if (isset($_POST['submit'])) {
 <?php include('include/header.php');?>
 <?php //include('include/manu.php');?>
 
-<script>
-function CustomAlert(){
-    this.on = function(alert){
-        var winW = window.innerWidth;
-        var winH = window.innerHeight;
-
-        alertoverlay.style.display = "block";
-        alertoverlay.style.height = window.innerHeight+"px";
-        alertbox.style.left = (window.innerWidth/3.5)+"pt";
-        alertbox.style.right = (window.innerWidth/3.5)+"pt"; // remove this if you don't want to have your alertbox to have a standard size but after you remove modify this line : alertbox.style.left=(window.inner.Width/4);
-    alertbox.style.top = (window.innerHeight/10)+"pt";
-        alertbox.style.display = "block";
-        document.getElementById('alertboxhead').innerHTML = "This is Warning....";
-        document.getElementById('alertboxbody').innerHTML = alert;
-        document.getElementById('alertboxfoot').innerHTML = '<button onclick="Alert.off()">OK</button>';
-    }
-    this.off = function(){
-        document.getElementById('alertbox').style.display = "none";
-        document.getElementById('alertoverlay').style.display = "none";
-    }
-}
-var Alert = new CustomAlert();
-</script>
-
-
-
 
 <script>
                     function show() {
@@ -191,23 +165,14 @@ error:function (){}
 									<div class="row">
 										<div class="col-md-6">
 											<label>Pic-Up DATE:
-                                    <input type="date" id="date1"  name="start_date" placeholder="Pick Up Date" required />
-
-                                    <span class="first" "></span>
-
+											<input type="date" id="date1"  name="start_date" placeholder="Pick Up Date" required />
                                     		</label>
-
-
 										</div>
 										<div class="col-md-6">
                                             <span id="user-availability-status1" style="font-size:12px;"></span>
 											<label>Return DATE:	
-                                        <input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" required />
-
-                                        
-                                        	</label>
-
-                                            
+											<input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" required />                                       
+                                        	</label>                                     
 										</div>
 									</div>
 
@@ -224,14 +189,14 @@ error:function (){}
                                    <!--  <input type="text"  name="location" placeholder="location" /> -->
                                    <select name="location" required> 
                                     <option value="" >Select Location</option>
-<?php
-    $query2=mysqli_query($con,"SELECT `location` FROM `location`");
+										<?php
+											$query2=mysqli_query($con,"SELECT `location` FROM `location`");
 
-            while ($row2 = mysqli_fetch_array($query2))
-            {
-echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>" ;
-}
-?>
+													while ($row2 = mysqli_fetch_array($query2))
+													{
+										echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>" ;
+										}
+										?>
 
                                    </select>
                                     		
@@ -306,8 +271,8 @@ echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>"
                                         
                                     </div>
                                 </div>
-										</div>
-									</div>
+							</div>
+						</div>
 
 								
 
